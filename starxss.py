@@ -61,4 +61,5 @@ def main():
 
 
 if __name__=='__main__':
+    print("欢迎使用STAR XSS")
     app.run(host="0.0.0.0",port=616)
