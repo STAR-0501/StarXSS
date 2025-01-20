@@ -5,7 +5,7 @@
     gap: 10px; /* Space between items */
 }
 
-.project-item {
+.device-item {
     position: relative;
     display: inline-block;
     width: 22%; /* 4 items per row */
@@ -18,20 +18,20 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
 }
 
-.project-header {
+.device-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.project-circle {
+.device-circle {
     width: 20px;
     height: 20px;
     background: #ccc;
     border-radius: 50%;
     cursor: pointer;
 }
-.project-circle.selected {
+.device-circle.selected {
     transform: scale(0.95); /* 按压效果 */
     background: rgb(5, 18, 134);
 }
@@ -78,6 +78,18 @@
     height: 100%;
 }
 
+#grey-back {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color:#000;
+    filter:alpha(opacity=60);  /*设置透明度为60%*/
+    opacity:0.6;
+    z-index: 9995;
+}
 
 .modal {
     display: none; /* 默认隐藏 */
@@ -163,4 +175,23 @@
     to {
         transform: rotate(360deg);
     }
+}
+
+#control-modal #control-content {
+    width: 90%;
+    height: 100%;
+    overflow: auto;
+}
+
+#control-modal #control-content .control-button {
+    position: relative;
+    float: left;
+    display: inline-block;
+    margin: 20px;
+    width: 10%;
+    height: 15%;
+}
+#control-modal #control-content .control-button img {
+    width: 100%;
+    height: 100%;
 }

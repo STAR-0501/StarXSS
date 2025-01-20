@@ -79,3 +79,16 @@
 .confirm-button:active {
     background-color: #66b0ff; /* 按压时变浅蓝色 */
 }
+#pay-modal {
+    width: 30%;
+    height: 60%;
+    text-align: center;
+}
+#pay-modal #modal-close {
+    position: absolute;
+    height: 10%;
+}
+#pay-modal #qrcode {
+    width: 100%;
+    height: 100%;
+}

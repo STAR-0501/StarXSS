@@ -17,17 +17,16 @@ function fetchData() {
             container.innerHTML = '';
             data.forEach(item => {
                 const itemDiv = document.createElement('div');
-                itemDiv.className = 'project-item';
+                itemDiv.className = 'device-item';
                 itemDiv.innerHTML = `
-                    <div class="project-header">
-                        <span class="project-name"><h3><strong>${item.title}</strong></h3></span>
-                        <div class="project-circle" onclick="toggleActionPanel(this)" data-url="${item.url}"></div>
+                    <div class="device-header">
+                        <span class="device-name"><h3><strong>${item.title}</strong></h3></span>
+                        <div class="device-circle" onclick="toggleActionPanel(this)" data-url="${item.url}"></div>
                     </div>
                     <div class="action-panel hidden">
                         <button>详细</button>
-                        <button>重命名</button>
                     </div>
-                    <a href="https://${item.url}"><div class="project-details">${item.url}</div></a>
+                    <a href="https://${item.url}"><div class="device-details">${item.url}</div></a>
                     
                 `;
                 container.appendChild(itemDiv);
@@ -68,7 +67,7 @@ function addDevice() {
     }
     var data = JSON.stringify({url: url});
     xhr.send(data);
-    closeDevice('add-modal');
+    closeModal();
 }
 
 function deleteDevice() {
@@ -92,12 +91,13 @@ function deleteDevice() {
     }
     datas = JSON.stringify(datas);
     xhr.send(datas);
-    closeDevice('delete-modal');
+    closeModal();
 
 }
 
-function openDevice (i) {
+function openModal (i) {
     const modal = document.getElementById(i);
+    const greyBack = document.getElementById('grey-back');
     const confirmBtn = document.getElementById('confirmBtn');
     const parentDiv = contentArea;
 
@@ -108,10 +108,16 @@ function openDevice (i) {
     modal.style.transform = 'translate(-50%, -50%)';
     // 显示弹窗
     modal.style.display = 'block';
+    greyBack.style.display = 'block';
 }
-function closeDevice (i) {
+function closeModal () {
     // 隐藏弹窗
-    const modal = document.getElementById(i);
-    modal.style.display = 'none';
+    const modals = document.getElementsByClassName("modal");
+    const greyBack = document.getElementById('grey-back');
+    for (let i = 0; i < modals.length; i++) {
+        var modal = modals[i];
+        modal.style.display = 'none';
+    }
+    greyBack.style.display = 'none';
 }
 

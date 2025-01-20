@@ -31,5 +31,8 @@ function sendPaymentRequest() {
         alert("请选择支付方式并选择金额！");
         return;
     }
+    const pay = document.getElementById("qrcode");
+    pay.src = "static/icons/"+selectedPaymentMethod+selectedAmount+".jpg";
+    openModal('pay-modal');
     console.log("Amount:", selectedAmount, "Payment Method:", selectedPaymentMethod); // 这里可以添加更多的逻辑处理支付请求
 }
