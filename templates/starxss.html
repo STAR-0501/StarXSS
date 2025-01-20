@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CH">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAR XSS工具箱</title>
+    <link rel="icon" href="{{ url_for('static', filename='icons/starxss.ico') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='starxss.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='devices.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>功能</h2>
+            <ul>
+                <li onclick="loadContent('devices')">连接设备</li>
+                <li onclick="loadContent('func')">本地脚本</li>
+                <li onclick="loadContent('about')">关于我们</li>
+                <!-- 在这里添加更多功能 -->
+            </ul>
+        </div>
+        <div class="content" id="contentArea">
+            <h1>欢迎使用XSS工具箱</h1>
+            <p>请从侧边栏选择一个功能开始。</p>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='starxss.js') }}"></script>
+    <script src="{{ url_for('static',filename='about.js') }}"></script>
+    <script src="{{ url_for('static',filename='devices.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+
+.sponsorship {
+    margin-top: 20px;
+    position: relative; /* 用于阴影效果 */
+    width: calc(60% - 40px); /* 调整宽度以适应容器 */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* 毛玻璃效果 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.payment-option {
+    display: inline-block;
+    width: calc((100% - 30px) / 3); /* 各占大div的1/3 */
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8); /* 毛玻璃效果 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    cursor: pointer;
+    transition: transform 0.2s; /* 添加过渡效果 */
+    height: 100px; /* 固定高度 */
+    width: 100px; /* 固定宽度 */
+    vertical-align: middle; /* 确保垂直居中对齐 */
+}
+
+.payment-option.selected {
+    transform: scale(0.95); /* 按压效果 */
+    border: 1px solid blue; /* 选中边框 */
+}
+
+.payment-option img {
+    width: 100%; /* 图片填满整个小div */
+    height: auto; /* 保持图片比例 */
+    object-fit: cover; /* 确保图片覆盖整个div */
+}
+
+.amount-options {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.amount-option {
+    display: inline-block;
+    width: calc((100% - 30px) / 5); /* 各占大div的1/5 */
+    margin: 10px;
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8); /* 毛玻璃效果 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+    cursor: pointer;
+    transition: transform 0.2s; /* 添加过渡效果 */
+    height: 20px; /* 固定高度 */
+    vertical-align: middle; /* 确保垂直居中对齐 */
+}
+
+.amount-option.selected {
+    transform: scale(0.95); /* 按压效果 */
+    border: 1px solid rgba(51, 174, 222, 0.8); /* 选中边框 */
+}
+
+.confirm-button {
+    width: calc(40% - 30px); /* 按钮宽度 */
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007BFF; /* 深蓝色背景 */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s; /* 添加过渡效果 */
+}
+
+.confirm-button:active {
+    background-color: #66b0ff; /* 按压时变浅蓝色 */
+}

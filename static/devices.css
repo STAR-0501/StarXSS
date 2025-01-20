@@ -1,0 +1,166 @@
+/* Basic styles for container and items */
+.devices-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Space between items */
+}
+
+.project-item {
+    position: relative;
+    display: inline-block;
+    width: 22%; /* 4 items per row */
+    height: 17vh;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Apply blur effect */
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-circle {
+    width: 20px;
+    height: 20px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.project-circle.selected {
+    transform: scale(0.95); /* 按压效果 */
+    background: rgb(5, 18, 134);
+}
+
+.action-panel {
+    position: absolute;
+    top: 10px;
+    right: 15%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    padding: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+.top-line {
+    width: 100%;
+    height: 5vh;
+    background: rgb(252, 252, 253); /* 毛玻璃效果 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+}
+
+.control-option {
+    position: relative;
+    float: right;
+    display: inline-block;
+    width: 4vh;
+    height: 4vh;
+    margin: 0.5vh;
+}
+
+.control-option#back {
+    float: left;
+}
+.control-option#refresh {
+    float: left;
+}
+
+.control-option img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.modal {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定位置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 33.33%; /* 父级宽度的15% */
+    height: 40%; /* 父级高度的15% */
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    flex-direction: column; /* 子元素垂直排列 */
+    z-index: 9999; /* 设置一个很高的z-index值，确保它在最上层 */
+    background: rgba(255, 255, 255, 0.8); /* 毛玻璃效果 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+}
+
+#add-modal input[type="text"] {
+    width: 80%; /* 调整宽度 */
+    height: 40px; /* 调整高度 */
+    padding: 10px;
+    margin: 10px;
+}
+
+#add-modal #confirmBtn {
+    width: 25%;
+    height: 45px;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: lightblue; /* 设置浅蓝色背景 */
+}
+#delete-modal #confirmBtn {
+    width: 25%;
+    height: 45px;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: lightblue; /* 设置浅蓝色背景 */
+}
+#delete-modal h1 {
+    text-align: center;
+    color: red;
+}
+
+.modal #modal-close{
+    position: relative;
+    float: right;
+    display: block;
+    width: 10%;
+    height: 14%;
+}
+.modal #modal-close img {
+    width: 100%;
+    height: 100%;
+}
+
+.outer-div {
+    position: relative;
+    display: block;
+    left: 45%;
+    top: 28vh;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.inner-div {
+    width: 100px; /* 可以根据需要调整 */
+    height: 100px; /* 可以根据需要调整 */
+}
+.inner-div img {
+    width: 100%;
+    height: 100%;
+    animation: rotate 5s linear infinite;
+}
+.inner-div span {
+    font: 1.2em "宋体", sans-serif;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
