@@ -5,7 +5,7 @@
     gap: 10px; /* Space between items */
 }
 
-.device-item {
+.item-box {
     position: relative;
     display: inline-block;
     width: 22%; /* 4 items per row */
@@ -73,10 +73,6 @@
     float: left;
 }
 
-.control-option img {
-    width: 100%;
-    height: 100%;
-}
 
 #grey-back {
     display: none;
@@ -109,8 +105,15 @@
     backdrop-filter: blur(10px); /* 毛玻璃效果 */
 }
 
+#add-modal span {
+    position: relative;
+    top: 0.2em;
+    display: inline-block;
+    font-size: 2em;
+
+}
 #add-modal input[type="text"] {
-    width: 80%; /* 调整宽度 */
+    width: 60%; /* 调整宽度 */
     height: 40px; /* 调整高度 */
     padding: 10px;
     margin: 10px;
@@ -142,10 +145,8 @@
     width: 10%;
     height: 14%;
 }
-.modal #modal-close img {
-    width: 100%;
-    height: 100%;
-}
+
+
 
 .outer-div {
     position: relative;
@@ -194,4 +195,32 @@
 #control-modal #control-content .control-button img {
     width: 100%;
     height: 100%;
+}
+
+.modals {
+    display: none; /* 默认隐藏 */
+    position: fixed; /* 固定位置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* 父级宽度的15% */
+    height: 85%; /* 父级高度的15% */
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    align-items: center; /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    flex-direction: column; /* 子元素垂直排列 */
+    z-index: 9999; /* 设置一个很高的z-index值，确保它在最上层 */
+    background: rgba(255, 255, 255, 0.8); /* 毛玻璃效果 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+}
+.modals #modal-close {
+    width: 10%;
+    height: 12%;
+    position: relative;
+    float: right;
+}
+
+#console-modal {
+    background: #000;
 }

@@ -1,3 +1,4 @@
+import json
 import os
 import shutil
 import requests
@@ -27,8 +28,13 @@ log.disabled=True
 def addDevice():
     data=request.get_json()
     url=data["url"]
+    url.replace("https://",'').replace("http://",'')
     try:
         outlog("添加网站"+url,'tips')
+        os.mkdir("devices/"+url)
+        return jsonify({"status":"success"}),200
+    except FileNotFoundError:
+        os.mkdir("devices/")
         os.mkdir("devices/"+url)
         return jsonify({"status":"success"}),200
     except FileExistsError:
@@ -37,7 +43,7 @@ def addDevice():
 
 
 @app.route('/deleteDevices/',methods=["POST"])
-def deleteDevice():
+def deleteDevices():
     datas=request.get_json()
     for data in datas:
         url=data["url"]
@@ -48,12 +54,24 @@ def deleteDevice():
             outlog(url+"删除失败",'error')
     return jsonify({"status":"success"}),200
 
+@app.route('/deleteClients/',methods=["POST"])
+def deleteClients():
+    datas=request.get_json()
+    for data in datas:
+        url=data["url"]
+        outlog("删除客户端"+url,'tips')
+        try:
+            os.remove("devices/"+url+".json")
+        except:
+            outlog(url+"删除失败",'error')
+    return jsonify({"status":"success"}),200
+
 
 @app.route('/getDevices/',methods=["POST"])
 def getDevices():
     ds=[]
     path='devices/'
-    for root,devices,users in os.walk(path):
+    for root,devices,clients in os.walk(path):
         for device in devices:
             try:
                 content=requests.get("https://"+device)
@@ -69,6 +87,31 @@ def getDevices():
     outlog('网站列表已刷新','tips')
     return ds
 
+@app.route('/getClients/',methods=["POST"])
+def getClients():
+    device = request.get_json()["device"]
+    ds=[]
+    path='devices/'
+    for root,devices,clients in os.walk(path+device):
+        for client in clients:
+            with open(path+device+"/"+client,'r') as j:
+                d = json.loads(j.read())
+                ds.append(d)
+    outlog('网站列表已刷新','tips')
+    return ds
+
+@app.route('/getScripts/',methods=["POST"])
+def getScripts():
+    ds=[]
+    path='scripts/'
+    for root,dirs,scripts in os.walk(path):
+        for script in scripts:
+            print(script)
+            with open(path+script,'r',encoding='utf-8') as j:
+                d=json.loads(j.read())
+                ds.append(d)
+    outlog('脚本列表已刷新','tips')
+    return ds
 
 @app.route('/')
 def main():
@@ -88,3 +131,11 @@ if __name__=='__main__':
     print("访问http://127.0.0.1:616使用本工具")
     print("\033[1;34m")  #蓝色
     app.run(host="0.0.0.0",port=616)
+
+
+# ░██████╗████████╗░█████╗░██████╗░ ██╗░░██╗░██████╗░██████╗
+# ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗ ╚██╗██╔╝██╔════╝██╔════╝
+# ╚█████╗░░░░██║░░░███████║██████╔╝ ░╚███╔╝░╚█████╗░╚█████╗░
+# ░╚═══██╗░░░██║░░░██╔══██║██╔══██╗ ░██╔██╗░░╚═══██╗░╚═══██╗
+# ██████╔╝░░░██║░░░██║░░██║██║░░██║ ██╔╝╚██╗██████╔╝██████╔╝
+# ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝ ╚═╝░░╚═╝╚═════╝░╚═════╝░

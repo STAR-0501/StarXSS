@@ -5,36 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d1ec8361-f831-4252-bc9e-2ea6176fc6f1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/STAR XSS.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/starxss.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/about.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/about.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/devices.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/devices.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/add-blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/add-grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/alipay.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/back-blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/back-grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/close.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/control-blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/control-grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/delete-blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/delete-grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/load.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/refresh.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/starxss.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/icons/wxpay.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/starxss.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/starxss.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/demo.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/starxss.html" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/devices/www.baidu.com/riyi.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/getArgs.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/icons/goto.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/script.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/starxss.py" beforeDir="false" afterPath="$PROJECT_DIR$/starxss.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/devices.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/devices.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/devices.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/devices.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/starxss.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/starxss.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/starxss.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/starxss.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/starxss.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/starxss.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="CSS File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -64,7 +46,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2rigAKVjohVxy1DzlgmtFZadMVX" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -74,7 +62,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/华为云盘/coding/python/项目/STAR XSS",
+    "last_opened_file_path": "E:/华为云盘/coding/python/项目/STAR XSS/static/icons",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -87,6 +75,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\华为云盘\coding\python\项目\STAR XSS\static\icons" />
+      <recent name="E:\华为云盘\coding\python\项目\STAR XSS\devices\www.jingdong.com" />
+      <recent name="E:\华为云盘\coding\python\项目\STAR XSS\devices\www.baidu.com" />
+      <recent name="E:\华为云盘\coding\python\项目\STAR XSS" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\华为云盘\coding\python\项目\STAR XSS" />
@@ -154,7 +145,7 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Flask (templates/demo.py)" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
+    <configuration name="Flask" type="Python.FlaskServer" temporary="true" nameIsGenerated="true">
       <module name="STAR XSS" />
       <option name="target" value="$PROJECT_DIR$/templates/demo.py" />
       <option name="targetType" value="PATH" />
@@ -188,6 +179,8 @@
       <workItem from="1737047166043" duration="19610000" />
       <workItem from="1737270168886" duration="4862000" />
       <workItem from="1737281260880" duration="11469000" />
+      <workItem from="1737373171685" duration="6033000" />
+      <workItem from="1737434139911" duration="8025000" />
     </task>
     <servers />
   </component>

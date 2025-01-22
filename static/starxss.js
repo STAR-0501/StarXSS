@@ -1,11 +1,62 @@
 function loadContent(pageName) {
     const contentArea = document.getElementById("contentArea");
     switch (pageName) {
+        case 'clients':
+            contentArea.innerHTML = `
+            <div class="top-line">
+                <div id="back" class="control-option"><img src="static/icons/back.png" alt="返回" onclick="loadContent('devices')"></div>
+                <div id="refresh" class="control-option"><img src="static/icons/refresh.png" alt="刷新" onclick="getClients()"></div>
+                <div id="control" class="control-option"><img src="static/icons/control.png" alt="操作" onclick="openModal('control-modal')"></div>
+                <div id="delete" class="control-option"><img src="static/icons/delete.png" alt="删除" onclick="openModal('delete-modal')"></div>
+            </div>  
+            <div id="grey-back"></div>
+            <div id="delete-modal" class="modal">
+                <div id="modal-close" onclick="closeModal()"><img src="static/icons/close.png" alt="返回"></div>
+                <h1>警告!!!</h1>
+                <h3>你确定要这么做吗？这将永远删除该网站及其下所有目标设备</h3>
+                <button id="confirmBtn" onclick="deleteClient()">确定删除</button>
+            </div>
+            <div id="control-modal" class="modal">
+                <div id="modal-close" onclick="closeModal()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    <div class="control-button" id="modals" onclick=""><img src="static/icons/modals.png" alt="使用模块" onclick="openModal('modals-modal')"></div>
+                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="openModal('auto-modal')"></div>
+                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台" onclick="openModal('console-modal')"></div>
+                    <div class="control-button" id="args" onclick=""><img src="static/icons/args.png" alt="设置参数" onclick="openModal('args-modal')"></div>
+                </div>
+            </div>
+            <div id="modals-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div id="auto-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div id="console-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div id="args-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div class="devices-container"></div>
+            `;
+            break;
         case 'devices':
             contentArea.innerHTML = `
             <div class="top-line">
                 <div id="back" class="control-option"><img src="static/icons/back.png" alt="返回"></div>
-                <div id="refresh" class="control-option"><img src="static/icons/refresh.png" alt="刷新" onclick="fetchData()"></div>
+                <div id="refresh" class="control-option"><img src="static/icons/refresh.png" alt="刷新" onclick="getDevices()"></div>
                 <div id="control" class="control-option"><img src="static/icons/control.png" alt="操作" onclick="openModal('control-modal')"></div>
                 <div id="delete" class="control-option"><img src="static/icons/delete.png" alt="删除" onclick="openModal('delete-modal')"></div>
                 <div id="add" class="control-option"><img src="static/icons/add.png" alt="添加" onclick="openModal('add-modal')"></div>
@@ -13,6 +64,7 @@ function loadContent(pageName) {
             <div id="grey-back"></div>
             <div id="add-modal" class="modal">
                 <div id="modal-close" onclick="closeModal()"><img src="static/icons/close.png" alt="返回"></div>
+                <span>https://</span>
                 <input type="text" placeholder="请输入目标网站url" id="target-url">
                 <button id="confirmBtn" onclick="addDevice()">保存</button>
             </div>
@@ -25,19 +77,45 @@ function loadContent(pageName) {
             <div id="control-modal" class="modal">
                 <div id="modal-close" onclick="closeModal()"><img src="static/icons/close.png" alt="返回"></div>
                 <div id="control-content">
-                    <div class="control-button" id="modals" onclick=""><img src="static/icons/modals.png" alt="使用模块"></div>
-                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行"></div>
-                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台"></div>
-                    <div class="control-button" id="args" onclick=""><img src="static/icons/args.png" alt="设置参数"></div>
+                    <div class="control-button" id="modals" onclick=""><img src="static/icons/modals.png" alt="使用模块" onclick="openModal('modals-modal')"></div>
+                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="openModal('auto-modal')"></div>
+                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台" onclick="openModal('console-modal')"></div>
+                    <div class="control-button" id="args" onclick=""><img src="static/icons/args.png" alt="设置参数" onclick="openModal('args-modal')"></div>
                 </div>
             </div>
-            <div class="devices-container">
+            <div id="modals-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
             </div>
+            <div id="auto-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div id="console-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div id="args-modal" class="modals">
+                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
+                <div id="control-content">
+                    
+                </div>
+            </div>
+            <div class="devices-container"></div>
             `;
-            fetchData()
+            getDevices()
             break;
         case 'func':
-            contentArea.innerHTML = `<h1>欢迎使用XSS工具箱</h1><p>请从侧边栏选择一个功能开始。</p>`;
+            contentArea.innerHTML = `
+                <div class="scripts-container"></div>
+            `;
+            getScripts()
             break;
         case 'about':
             contentArea.innerHTML = `
@@ -80,7 +158,14 @@ function loadContent(pageName) {
 window.onload = function () {
     document.onkeydown = function (event) {
       if (event.key === 'Escape') {
-        closeModal()
+        const modals = document.getElementsByClassName("modals");
+          for (let i = 0; i < modals.length; i++) {
+              if (modals[i].style.display!=='none'){
+                  closeModals();
+                  return;
+              }
+          }
+          closeModal()
       }
     }
 }

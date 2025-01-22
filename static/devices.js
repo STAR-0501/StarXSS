@@ -1,4 +1,8 @@
-function fetchData() {
+var nowDevice = ""
+
+
+
+function getDevices() {
     var data;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/getDevices/', true);
@@ -17,16 +21,16 @@ function fetchData() {
             container.innerHTML = '';
             data.forEach(item => {
                 const itemDiv = document.createElement('div');
-                itemDiv.className = 'device-item';
+                itemDiv.className = 'item-box';
                 itemDiv.innerHTML = `
                     <div class="device-header">
                         <span class="device-name"><h3><strong>${item.title}</strong></h3></span>
                         <div class="device-circle" onclick="toggleActionPanel(this)" data-url="${item.url}"></div>
                     </div>
                     <div class="action-panel hidden">
-                        <button>详细</button>
+                        <button onclick="getClients(this)" data-url="${item.url}">详细</button>
                     </div>
-                    <a href="https://${item.url}"><div class="device-details">${item.url}</div></a>
+                    <a href="https://${item.url}"><div class="detail-box">${item.url}</div></a>
                     
                 `;
                 container.appendChild(itemDiv);
@@ -36,6 +40,50 @@ function fetchData() {
     xhr.send();
 
 
+}
+
+function getClients(url) {
+    loadContent('clients');
+    if (url === undefined) device=nowDevice;
+    else device = url.getAttribute("data-url");
+    const sendData = {device: device};
+    var data;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/getClients/', true);
+    xhr.setRequestHeader("Content-Type","application/json")
+    const container = document.querySelector('.devices-container');
+    container.innerHTML = `
+        <div class="outer-div">
+            <div class="inner-div">
+                <img src="static/icons/load.png" alt="加载中...">
+                <span>加载中....</span>
+            </div>
+        </div>
+    `;
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            data = eval(xhr.responseText); // 打印服务器响应
+            container.innerHTML = '';
+            nowDevice = device;
+            data.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item-box';
+                itemDiv.innerHTML = `
+                    <div class="device-header">
+                        <span class="device-name"><h3><strong>${item.name}</strong></h3></span>
+                        <div class="device-circle" onclick="toggleActionPanel(this)" data-name="${item.name}"></div>
+                    </div>
+                    <div class="action-panel hidden">
+                        <button>详细</button>
+                    </div>
+                    <div class="detail-box">${item.detail}</div>
+                    
+                `;
+                container.appendChild(itemDiv);
+            });
+        }
+    };
+    xhr.send(JSON.stringify(sendData));
 }
 
 function toggleActionPanel(circle) {
@@ -62,7 +110,7 @@ function addDevice() {
             var sta = JSON.parse(xhr.responseText)["status"];
             console.log(sta);
             if (sta==="failed")alert(url+"已存在");
-            fetchData()
+            getDevices()
         }
     }
     var data = JSON.stringify({url: url});
@@ -86,13 +134,37 @@ function deleteDevice() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200){
             console.log('success');
-            fetchData()
+            getDevices()
         }
     }
     datas = JSON.stringify(datas);
     xhr.send(datas);
     closeModal();
+}
 
+function deleteClient() {
+    const device = nowDevice;
+    var datas = [];
+    clients = document.getElementsByClassName("selected");
+    if (!clients.length)alert("请选择要删除的目标");
+    for (let i = 0; i < clients.length; i++) {
+        name = clients[i].getAttribute("data-name");
+        console.log(clients[i]);
+        datas.push({url: device+'/'+name});
+    }
+    console.log(datas)
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/deleteClients/', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200){
+            console.log('success');
+            getClients(device)
+        }
+    }
+    datas = JSON.stringify(datas);
+    xhr.send(datas);
+    closeModal();
 }
 
 function openModal (i) {
@@ -112,8 +184,9 @@ function openModal (i) {
 }
 function closeModal () {
     // 隐藏弹窗
-    const modals = document.getElementsByClassName("modal");
+    closeModals()
     const greyBack = document.getElementById('grey-back');
+    const modals = document.getElementsByClassName("modal");
     for (let i = 0; i < modals.length; i++) {
         var modal = modals[i];
         modal.style.display = 'none';
@@ -121,3 +194,14 @@ function closeModal () {
     greyBack.style.display = 'none';
 }
 
+function closeModals() {
+
+    const greyBack = document.getElementById('grey-back');
+    const modals = document.getElementsByClassName("modals");
+    for (let i = 0; i < modals.length; i++) {
+        var modal = modals[i];
+        modal.style.display = 'none';
+    }
+
+    greyBack.style.display = 'none';
+}
