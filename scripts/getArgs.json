@@ -1,7 +1,0 @@
-{
-  "id": "1",
-  "name": "获取参数",
-  "detail": "STAR XSS内置函数 用于从客户端获取任意值\n使用方法：value = get(变量名)",
-  "version": "alpha 1.0",
-  "script": "alert('测试')"
-}

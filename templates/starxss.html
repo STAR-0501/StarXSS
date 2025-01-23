@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='starxss.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='devices.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='script.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='scripts.css') }}">
+
+    <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="container">
         <div class="sidebar">
             <h2>功能</h2>
             <ul>
+                <li onclick="loadContent('intro')">软件介绍</li>
                 <li onclick="loadContent('devices')">连接设备</li>
-                <li onclick="loadContent('func')">本地脚本</li>
+                <li onclick="loadContent('script')">本地脚本</li>
                 <li onclick="loadContent('about')">关于我们</li>
                 <!-- 在这里添加更多功能 -->
             </ul>
@@ -26,9 +29,11 @@
             <p>请从侧边栏选择一个功能开始。</p>
         </div>
     </div>
-    <script src="{{ url_for('static', filename='starxss.js') }}"></script>
+    <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
     <script src="{{ url_for('static',filename='about.js') }}"></script>
     <script src="{{ url_for('static',filename='devices.js') }}"></script>
-    <script src="{{ url_for('static',filename='script.js') }}"></script>
+    <script src="{{ url_for('static',filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='starxss.js') }}"></script>
+
 </body>
 </html>

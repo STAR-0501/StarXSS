@@ -214,13 +214,3 @@
     background: rgba(255, 255, 255, 0.8); /* 毛玻璃效果 */
     backdrop-filter: blur(10px); /* 毛玻璃效果 */
 }
-.modals #modal-close {
-    width: 10%;
-    height: 12%;
-    position: relative;
-    float: right;
-}
-
-#console-modal {
-    background: #000;
-}

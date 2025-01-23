@@ -1,3 +1,5 @@
+var nowDevice = "";
+
 function loadContent(pageName) {
     const contentArea = document.getElementById("contentArea");
     switch (pageName) {
@@ -79,7 +81,7 @@ function loadContent(pageName) {
                 <div id="control-content">
                     <div class="control-button" id="modals" onclick=""><img src="static/icons/modals.png" alt="使用模块" onclick="openModal('modals-modal')"></div>
                     <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="openModal('auto-modal')"></div>
-                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台" onclick="openModal('console-modal')"></div>
+                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台" onclick="openEditor()"></div>
                     <div class="control-button" id="args" onclick=""><img src="static/icons/args.png" alt="设置参数" onclick="openModal('args-modal')"></div>
                 </div>
             </div>
@@ -96,9 +98,10 @@ function loadContent(pageName) {
                 </div>
             </div>
             <div id="console-modal" class="modals">
-                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
                 <div id="control-content">
-                    
+                    <div id="editor—wrapper">
+                      <div id="editor-container"><!-- 编辑器 --></div>
+                    </div>
                 </div>
             </div>
             <div id="args-modal" class="modals">
@@ -111,8 +114,13 @@ function loadContent(pageName) {
             `;
             getDevices()
             break;
-        case 'func':
+        case 'script':
             contentArea.innerHTML = `
+                <div class="top-line">
+                    <div id="back" class="control-option"><img src="static/icons/back.png" alt="返回"></div>
+                    <div id="refresh" class="control-option"><img src="static/icons/refresh.png" alt="刷新" onclick="getDevices()"></div>
+                    <div id="more" class="control-option"><a href="https://starxss.starbot.top">更多脚本?去下载-></a></div>
+                </div>  
                 <div class="scripts-container"></div>
             `;
             getScripts()

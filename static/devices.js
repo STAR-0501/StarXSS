@@ -1,8 +1,5 @@
-var nowDevice = ""
-
-
-
 function getDevices() {
+    nowDevice = "";
     var data;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/getDevices/', true);
@@ -44,13 +41,13 @@ function getDevices() {
 
 function getClients(url) {
     loadContent('clients');
-    if (url === undefined) device=nowDevice;
-    else device = url.getAttribute("data-url");
-    const sendData = {device: device};
+    if (url) nowDevice = url.getAttribute("data-url");
+
+    const sendData = {device: nowDevice};
     var data;
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/getClients/', true);
-    xhr.setRequestHeader("Content-Type","application/json")
+    xhr.setRequestHeader("Content-Type", "application/json")
     const container = document.querySelector('.devices-container');
     container.innerHTML = `
         <div class="outer-div">
@@ -64,7 +61,6 @@ function getClients(url) {
         if (xhr.readyState === 4 && xhr.status === 200) {
             data = eval(xhr.responseText); // 打印服务器响应
             container.innerHTML = '';
-            nowDevice = device;
             data.forEach(item => {
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'item-box';
@@ -106,10 +102,10 @@ function addDevice() {
     xhr.open('POST', '/addDevices/', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200){
+        if (xhr.readyState === 4 && xhr.status === 200) {
             var sta = JSON.parse(xhr.responseText)["status"];
             console.log(sta);
-            if (sta==="failed")alert(url+"已存在");
+            if (sta === "failed") alert(url + "已存在");
             getDevices()
         }
     }
@@ -119,55 +115,54 @@ function addDevice() {
 }
 
 function deleteDevice() {
-    var datas = [];
+    var sendData = [];
     devices = document.getElementsByClassName("selected");
-    if (!devices.length)alert("请选择要删除的目标");
+    if (!devices.length) alert("请选择要删除的目标");
     for (let i = 0; i < devices.length; i++) {
         url = devices[i].getAttribute("data-url");
         console.log(devices[i]);
-        datas.push({url: url});
+        sendData.push({url: url});
     }
-    console.log(datas)
+    console.log(sendData)
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/deleteDevices/', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200){
+        if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('success');
             getDevices()
         }
     }
-    datas = JSON.stringify(datas);
-    xhr.send(datas);
+    sendData = JSON.stringify(sendData);
+    xhr.send(sendData);
     closeModal();
 }
 
 function deleteClient() {
-    const device = nowDevice;
-    var datas = [];
+    var sendData = [];
     clients = document.getElementsByClassName("selected");
-    if (!clients.length)alert("请选择要删除的目标");
+    if (!clients.length) alert("请选择要删除的目标");
     for (let i = 0; i < clients.length; i++) {
         name = clients[i].getAttribute("data-name");
         console.log(clients[i]);
-        datas.push({url: device+'/'+name});
+        sendData.push({url: nowDevice + '/' + name});
     }
-    console.log(datas)
+    console.log(sendData)
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/deleteClients/', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200){
+        if (xhr.readyState === 4 && xhr.status === 200) {
             console.log('success');
-            getClients(device)
+            getClients(nowDevice)
         }
     }
-    datas = JSON.stringify(datas);
-    xhr.send(datas);
+    sendData = JSON.stringify(sendData);
+    xhr.send(sendData);
     closeModal();
 }
 
-function openModal (i) {
+function openModal(i) {
     const modal = document.getElementById(i);
     const greyBack = document.getElementById('grey-back');
     const confirmBtn = document.getElementById('confirmBtn');
@@ -182,7 +177,8 @@ function openModal (i) {
     modal.style.display = 'block';
     greyBack.style.display = 'block';
 }
-function closeModal () {
+
+function closeModal() {
     // 隐藏弹窗
     closeModals()
     const greyBack = document.getElementById('grey-back');

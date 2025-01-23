@@ -97,7 +97,7 @@ def getClients():
             with open(path+device+"/"+client,'r') as j:
                 d = json.loads(j.read())
                 ds.append(d)
-    outlog('网站列表已刷新','tips')
+    outlog(device+'的客户端列表已刷新','tips')
     return ds
 
 @app.route('/getScripts/',methods=["POST"])
@@ -106,12 +106,24 @@ def getScripts():
     path='scripts/'
     for root,dirs,scripts in os.walk(path):
         for script in scripts:
-            print(script)
             with open(path+script,'r',encoding='utf-8') as j:
                 d=json.loads(j.read())
                 ds.append(d)
     outlog('脚本列表已刷新','tips')
     return ds
+
+
+@app.route('/updateConsole/',methods=['POST'])
+def updateConsole():
+    device=request.get_json()["device"]
+    clients=request.get_json()["clients"]
+    path='devices/'
+    for client in clients:
+        with open(path+device+client+'.json','w') as j:
+            d=json.loads(j.read())["console"]
+            print(d)
+    outlog('网站列表已刷新','tips')
+    return d
 
 @app.route('/')
 def main():
