@@ -6,7 +6,6 @@ import art
 import time
 import logging
 
-
 from lxml import etree
 from flask import Flask,render_template,request,jsonify
 
@@ -19,7 +18,7 @@ def outlog(log,types):
     print(time.strftime("%Y-%m-%d %H:%M:%S  "),log)
 
 
-app=Flask("STAR XSS")
+app=Flask("STAR XSS",template_folder='./static/templates')
 log=logging.getLogger('werkzeug')
 log.disabled=True
 
@@ -28,7 +27,7 @@ log.disabled=True
 def addDevice():
     data=request.get_json()
     url=data["url"]
-    url.replace("https://",'').replace("http://",'')
+    url=url.replace("https://",'').replace("http://",'')
     try:
         outlog("添加网站"+url,'tips')
         os.mkdir("devices/"+url)
@@ -53,6 +52,7 @@ def deleteDevices():
         except:
             outlog(url+"删除失败",'error')
     return jsonify({"status":"success"}),200
+
 
 @app.route('/deleteClients/',methods=["POST"])
 def deleteClients():
@@ -87,18 +87,20 @@ def getDevices():
     outlog('网站列表已刷新','tips')
     return ds
 
+
 @app.route('/getClients/',methods=["POST"])
 def getClients():
-    device = request.get_json()["device"]
+    device=request.get_json()["device"]
     ds=[]
     path='devices/'
     for root,devices,clients in os.walk(path+device):
         for client in clients:
             with open(path+device+"/"+client,'r') as j:
-                d = json.loads(j.read())
+                d=json.loads(j.read())
                 ds.append(d)
     outlog(device+'的客户端列表已刷新','tips')
     return ds
+
 
 @app.route('/getScripts/',methods=["POST"])
 def getScripts():
@@ -116,14 +118,70 @@ def getScripts():
 @app.route('/updateConsole/',methods=['POST'])
 def updateConsole():
     device=request.get_json()["device"]
+    client=request.get_json()["client"]
+    command=request.get_json()["command"]
+    path='devices/'
+    p=path+device+client
+    with open(p+'.json','r',encoding="utf-8") as j:
+        d=json.loads(j.read())
+    commands=d["console"]
+    if command!="":
+        reply="test"
+        commands.append({"command":command,"reply":reply})
+        d["console"]=commands
+        with open(p+'.json','w',encoding='utf-8') as j:
+            j.write(json.dumps(d))
+        outlog('已在'+p+'运行命令'+command+'  返回结果：'+reply,'tips')
+
+    return commands,200
+
+
+@app.route('/setAutoDo/',methods=['POST'])
+def setAutoDo():
+    device=request.get_json()["device"]
     clients=request.get_json()["clients"]
+    scripts=request.get_json()["scripts"]
     path='devices/'
     for client in clients:
-        with open(path+device+client+'.json','w') as j:
-            d=json.loads(j.read())["console"]
-            print(d)
-    outlog('网站列表已刷新','tips')
-    return d
+        if device=='':
+            p=path+client
+            for d,dirs,cs in os.walk(p):
+                for c in cs:
+                    with open(p+'/'+c,'r',encoding='utf-8') as j:
+                        d=json.loads(j.read())
+                    d["autoDo"]=scripts
+                    with open(p+'/'+c,'w',encoding='utf-8') as j:
+                        j.write(json.dumps(d))
+        else:
+            p=path+device+'/'+client
+            print(p)
+            with open(p+'.json','r',encoding='utf-8') as j:
+                d=json.loads(j.read())
+            d["autoDo"]=scripts
+            with open(p+'.json','w',encoding='utf-8') as j:
+                j.write(json.dumps(d))
+        outlog(client+' 自动执行列表已刷新','tips')
+    return "",0
+
+
+@app.route('/getAutoDo/',methods=['POST'])
+def getAutoDo():
+    device=request.get_json()["device"]
+    client=request.get_json()["clients"][0]
+    path='devices/'
+    if device=='':
+        p=path+client
+        for device,dirs,cs in os.walk(p):
+            c=cs[0]
+            with open(p+'/'+c,'r',encoding='utf-8') as j:
+                d=json.loads(j.read())["autoDo"]
+            break
+    else:
+        p=path+device+'/'+client
+        with open(p+'.json','r',encoding='utf-8') as j:
+            d=json.loads(j.read())["autoDo"]
+    return d,200
+
 
 @app.route('/')
 def main():
@@ -143,7 +201,6 @@ if __name__=='__main__':
     print("访问http://127.0.0.1:616使用本工具")
     print("\033[1;34m")  #蓝色
     app.run(host="0.0.0.0",port=616)
-
 
 # ░██████╗████████╗░█████╗░██████╗░ ██╗░░██╗░██████╗░██████╗
 # ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗ ╚██╗██╔╝██╔════╝██╔════╝

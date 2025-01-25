@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='scripts.css') }}">
 
-    <link href="https://unpkg.com/@wangeditor/editor@latest/dist/css/style.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="container">
@@ -29,10 +28,10 @@
             <p>请从侧边栏选择一个功能开始。</p>
         </div>
     </div>
-    <script src="https://unpkg.com/@wangeditor/editor@latest/dist/index.js"></script>
-    <script src="{{ url_for('static',filename='about.js') }}"></script>
-    <script src="{{ url_for('static',filename='devices.js') }}"></script>
-    <script src="{{ url_for('static',filename='scripts.js') }}"></script>
+    {#    jquery    #}
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="{{ url_for('static',filename='funcs.js') }}"></script>
+    <script src="{{ url_for('static',filename='modals.js') }}"></script>
     <script src="{{ url_for('static', filename='starxss.js') }}"></script>
 
 </body>

@@ -1,5 +1,1 @@
-{
-  "name": "riyi",
-  "detail": "I love STAR",
-  "console": ""
-}
+{"name": "riyi", "detail": "detail", "autoDo": [{"id": "1", "version": "1.0"}], "console": []}

@@ -31,7 +31,12 @@
     border-radius: 50%;
     cursor: pointer;
 }
-.device-circle.selected {
+.selected {
+    transform: scale(0.95); /* 按压效果 */
+    background: rgb(5, 18, 134);
+}
+
+.sSelected {
     transform: scale(0.95); /* 按压效果 */
     background: rgb(5, 18, 134);
 }
@@ -138,7 +143,7 @@
     color: red;
 }
 
-.modal #modal-close{
+.modal #modal-close {
     position: relative;
     float: right;
     display: block;
@@ -146,7 +151,17 @@
     height: 14%;
 }
 
-
+.modals #modal-close {
+    position: relative;
+    float: right;
+    display: block;
+    width: 6%;
+    height: 8%;
+}
+.modals button {
+    height: 8%;
+    width: 12%;
+}
 
 .outer-div {
     position: relative;

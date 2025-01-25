@@ -22,8 +22,7 @@ function loadContent(pageName) {
                 <div id="modal-close" onclick="closeModal()"><img src="static/icons/close.png" alt="返回"></div>
                 <div id="control-content">
                     <div class="control-button" id="modals" onclick=""><img src="static/icons/modals.png" alt="使用模块" onclick="openModal('modals-modal')"></div>
-                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="openModal('auto-modal')"></div>
-                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台" onclick="openModal('console-modal')"></div>
+                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="selectScripts('auto-modal')"></div>
                     <div class="control-button" id="args" onclick=""><img src="static/icons/args.png" alt="设置参数" onclick="openModal('args-modal')"></div>
                 </div>
             </div>
@@ -35,15 +34,18 @@ function loadContent(pageName) {
             </div>
             <div id="auto-modal" class="modals">
                 <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
-                <div id="control-content">
-                    
-                </div>
+                <button onclick="setAutoDo()">设置</button>
+                <h1>设置自动执行</h1>
+                <div id="control-content"></div>
             </div>
             <div id="console-modal" class="modals">
-                <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
-                <div id="control-content">
-                    
-                </div>
+                <div id="output"></div>
+                    <div id="control-content">
+                        <div id="editor-container">
+                            <textarea name="" id="editor" cols="30" rows="10"></textarea>
+                            <button id="editor-commit" onclick="openEditor()">发送</button>
+                        </div>
+                    </div>
             </div>
             <div id="args-modal" class="modals">
                 <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
@@ -80,8 +82,7 @@ function loadContent(pageName) {
                 <div id="modal-close" onclick="closeModal()"><img src="static/icons/close.png" alt="返回"></div>
                 <div id="control-content">
                     <div class="control-button" id="modals" onclick=""><img src="static/icons/modals.png" alt="使用模块" onclick="openModal('modals-modal')"></div>
-                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="openModal('auto-modal')"></div>
-                    <div class="control-button" id="console" onclick=""><img src="static/icons/console.png" alt="控制台" onclick="openEditor()"></div>
+                    <div class="control-button" id="auto" onclick=""><img src="static/icons/auto.png" alt="自动运行" onclick="selectScripts('auto-modal')"></div>
                     <div class="control-button" id="args" onclick=""><img src="static/icons/args.png" alt="设置参数" onclick="openModal('args-modal')"></div>
                 </div>
             </div>
@@ -93,16 +94,9 @@ function loadContent(pageName) {
             </div>
             <div id="auto-modal" class="modals">
                 <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
-                <div id="control-content">
-                    
-                </div>
-            </div>
-            <div id="console-modal" class="modals">
-                <div id="control-content">
-                    <div id="editor—wrapper">
-                      <div id="editor-container"><!-- 编辑器 --></div>
-                    </div>
-                </div>
+                <button onclick="setAutoDo()">设置</button>
+                <h1>设置自动执行</h1>
+                <div id="control-content"></div>
             </div>
             <div id="args-modal" class="modals">
                 <div id="modal-close" onclick="closeModals()"><img src="static/icons/close.png" alt="返回"></div>
@@ -163,17 +157,18 @@ function loadContent(pageName) {
     }
 }
 
-window.onload = function () {
-    document.onkeydown = function (event) {
-      if (event.key === 'Escape') {
-        const modals = document.getElementsByClassName("modals");
-          for (let i = 0; i < modals.length; i++) {
-              if (modals[i].style.display!=='none'){
-                  closeModals();
-                  return;
-              }
-          }
-          closeModal()
-      }
+$(document).keydown(function(event) {
+    if (event.key === 'Escape') {
+        $(".modals").each(function() {
+            if ($(this).css('display') !== 'none') {
+                closeModals();
+                return false; // 退出循环
+            }
+        });
+        closeModal();
     }
-}
+    if (event.key === 'Enter' && nowClient !== '') {
+        $("#editor-commit").click();
+    }
+});
+
